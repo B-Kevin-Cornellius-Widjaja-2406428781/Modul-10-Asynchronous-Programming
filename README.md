@@ -42,3 +42,14 @@ Saya mengubah port websocket dari 2000 ke 8080. Perubahan dilakukan di dua file:
 2. **`src/bin/client.rs`**: Mengubah URI dari `ws://127.0.0.1:2000` menjadi `ws://127.0.0.1:8080` agar client terhubung ke port yang benar.
 
 Kedua belah pihak (server dan client) harus menggunakan port yang sama agar websocket handshake dan komunikasi TCP bisa terjalin. Protokol websocket menggunakan `ws://` sebagai scheme-nya.
+
+## Experiment 2.3: Small changes, add IP and Port
+
+![Screenshot Eksperimen 2.3](docs/images/2_3.png)
+
+**Penjelasan Modifikasi:**
+Saya memodifikasi server agar menampilkan IP dan Port pengirim pada setiap pesan broadcast. Perubahan dilakukan di `handle_connection` dalam `server.rs` - setiap kali server menerima pesan dari client, ia mengekstrak `addr.ip()` dan `addr.port()` dari variabel `addr` (bertipe `SocketAddr`) kemudian memformat ulang pesan menjadi `[IP:Port]: message`. Pesan yang sudah diformat inilah yang kemudian di-broadcast ke semua client.
+
+Output yang terlihat:
+- **Server console:** `New connection from Kevin[127.0.0.1:54875]` dan `From client [127.0.0.1:54875]: "hi"`
+- **Client console:** `Kevin - From server: [127.0.0.1:54875]: Client 3`
