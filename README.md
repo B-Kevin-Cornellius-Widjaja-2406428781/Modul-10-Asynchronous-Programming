@@ -65,7 +65,20 @@ Saya mensetup proyek YewChat yang terdiri dari dua bagian:
 
 Untuk menjalankan:
 1. Jalankan server: `cd SimpleWebsocketServer && npm start`
-2. Build dan jalankan frontend dengan wasm-pack (`cd YewChat && npm install && npm run start`)
+2. Build dan jalankan frontend dengan wasm-pack (`cd YewChat && npm install && npm run wasm && npm run start`)
 3. Buka browser dan akses aplikasi webchat
 
 Ketika user mengetik pesan, pesan tersebut dikirim ke server websocket lalu di-broadcast ke semua client yang terhubung secara real-time.
+
+## Experiment 3.2: UI Revamp YewChat
+
+![Screenshot Chat UI](docs/images/3_2.png)
+![Screenshot Login & Studio](docs/images/3_2_1.png)
+
+**Penjelasan:**
+Saya melakukan perubahan tampilan YewChat agar lebih sederhana dan tenang. Detail perubahan:
+- **Warna:** Mengganti latar ke warna solid hijau lembut (#f7fbf5), kartu putih bersih, dan aksen hijau (emerald/lime/teal) supaya tampilan terasa rapi dan ringan.
+- **Layout:** Login disusun dua kolom (teks di kiri, form di kanan) dengan card yang lebih kompak. Halaman chat dipisah jelas antara sidebar user dan area chat utama, dengan header tipis dan input di bawah yang clean.
+- **Page tambahan:** Menambahkan halaman "Studio" sebagai landing singkat sebelum chat, berisi tips ringan dan mood/ritual untuk memulai percakapan.
+- **Ikon & avatar:** Menghapus avatar gambar dan menggantinya dengan badge inisial berbentuk lingkaran dengan warna solid berbeda-beda agar konsisten dan ringan.
+- **Tipografi & komponen:** Menggunakan font display untuk judul, rounded corners di card/input/button, dan teks yang lebih friendly.
