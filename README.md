@@ -82,3 +82,20 @@ Saya melakukan perubahan tampilan YewChat agar lebih sederhana dan tenang. Detai
 - **Page tambahan:** Menambahkan halaman "Studio" sebagai landing singkat sebelum chat, berisi tips ringan dan mood/ritual untuk memulai percakapan.
 - **Ikon & avatar:** Menghapus avatar gambar dan menggantinya dengan badge inisial berbentuk lingkaran dengan warna solid berbeda-beda agar konsisten dan ringan.
 - **Tipografi & komponen:** Menggunakan font display untuk judul, rounded corners di card/input/button, dan teks yang lebih friendly.
+
+## Bonus: Rust WebSocket Server untuk YewChat
+
+**Penjelasan perubahan:**
+Saya memodifikasi server Rust di Tutorial 2 supaya kompatibel dengan format pesan YewChat (Tutorial 3). Perubahan utama:
+- **Format pesan:** Server sekarang menerima JSON dengan field `messageType`, `data`, dan `dataArray`. Pesan tetap dikirim sebagai text frame, hanya kontennya berupa JSON string (serialize/deserialize).
+- **Register & users list:** Saat client mengirim `messageType: register`, server menyimpan username berdasarkan socket address lalu membroadcast daftar user dengan `messageType: users`.
+- **Message broadcast:** Saat `messageType: message`, server mencari nama pengirim, membungkus payload `{ from, message, time }`, lalu membroadcast JSON `messageType: message` ke semua client.
+- **Disconnect cleanup:** Ketika client disconnect, server menghapus user dari map lalu mengirim ulang daftar user.
+
+**Mengapa ini berhasil:**
+- YewChat sudah mengirim data sebagai text frame JSON, jadi server Rust hanya perlu membaca string lalu `serde_json::from_str`.
+- Response dari server mengikuti skema yang sama seperti SimpleWebsocketServer, sehingga komponen YewChat (`WebSocketMessage`) bisa mem-parse tanpa perubahan.
+- Port server tetap `8080`, cocok dengan URL websocket YewChat (`ws://127.0.0.1:8080`).
+
+**Preferensi saya:**
+Saya lebih prefer **Rust server** karena type safety, lebih mudah menjaga kontrak JSON, dan performa/concurrency-nya kuat untuk banyak koneksi. Namun versi **JavaScript** lebih cepat untuk prototyping karena setup lebih sederhana. Untuk produksi atau skala besar, saya pilih Rust.
