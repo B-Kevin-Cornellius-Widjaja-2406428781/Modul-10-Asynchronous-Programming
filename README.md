@@ -85,6 +85,10 @@ Saya melakukan perubahan tampilan YewChat agar lebih sederhana dan tenang. Detai
 
 ## Bonus: Rust WebSocket Server untuk YewChat
 
+![Bonus YewChat](docs/images/bonus_1.png)
+![Bonus Client Terminal](docs/images/bonus_2.png)
+![Bonus Server Terminal](docs/images/bonus_3.png)
+
 **Penjelasan perubahan:**
 Saya memodifikasi server Rust di Tutorial 2 supaya kompatibel dengan format pesan YewChat (Tutorial 3). Perubahan utama:
 - **Format pesan:** Server sekarang menerima JSON dengan field `messageType`, `data`, dan `dataArray`. Pesan tetap dikirim sebagai text frame, hanya kontennya berupa JSON string (serialize/deserialize).
