@@ -1,0 +1,8 @@
+[package]
+name = "timer_async"
+version = "0.1.0"
+authors = ["Kevin Cornellius Widjaja <kevin.cornellius@ui.ac.id>"]
+edition = "2024"
+
+[dependencies]
+futures = "0.3.32"
