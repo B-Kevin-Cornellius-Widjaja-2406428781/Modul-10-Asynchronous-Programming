@@ -53,3 +53,19 @@ Saya memodifikasi server agar menampilkan IP dan Port pengirim pada setiap pesan
 Output yang terlihat:
 - **Server console:** `New connection from Kevin[127.0.0.1:54875]` dan `From client [127.0.0.1:54875]: "hi"`
 - **Client console:** `Kevin - From server: [127.0.0.1:54875]: Client 3`
+
+## Experiment 3.1: Original code
+
+![Screenshot Eksperimen 3.1](docs/images/3_1.png)
+
+**Penjelasan:**
+Saya mensetup proyek YewChat yang terdiri dari dua bagian:
+1. **Yew Frontend (Rust + WebAssembly):** Aplikasi webchat berbasis Yew framework yang di-compile ke WebAssembly. Frontend berkomunikasi dengan server melalui websocket.
+2. **SimpleWebsocketServer (Node.js):** Server websocket berbasis JavaScript/TypeScript yang menjalankan `npm start` pada port 8080.
+
+Untuk menjalankan:
+1. Jalankan server: `cd SimpleWebsocketServer && npm start`
+2. Build dan jalankan frontend dengan wasm-pack (`cd YewChat && npm install && npm run start`)
+3. Buka browser dan akses aplikasi webchat
+
+Ketika user mengetik pesan, pesan tersebut dikirim ke server websocket lalu di-broadcast ke semua client yang terhubung secara real-time.
